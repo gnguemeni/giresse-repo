@@ -1,5 +1,3 @@
-trigger:
-- task: AdvancedSecurity-Codeql-Init@1
+- task: DotNetCoreCLI@2
   inputs:
-    languages: 'python'
-    querysuite: 'security-extended'
+    command: 'build'
