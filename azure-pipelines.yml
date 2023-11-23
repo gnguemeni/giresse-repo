@@ -1,27 +1,5 @@
 trigger:
-- main  # Vous pouvez ajuster la branche selon vos besoins
-
-pool:
-  vmImage: 'windows-latest'  # Ou choisissez une autre image selon vos besoins
-
-jobs:
-- job: RunGitHubScript
-  steps:
-  - checkout: self
-
-  # Installe Git pour récupérer le référentiel GitHub
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'runtime'
-      version: '2.x'
-      installationPath: $(Agent.ToolsDirectory)/dotnet
-
-  - script: |
-      git clone https://github.com/gnguemeni/giresse-repo
-    displayName: 'Clone GitHub Repository'
-
-  # Exécutez votre script ici
-  - script: |
-      cd votre-repo
-      ./votre-script.sh  # Remplacez par le nom de votre script
-    displayName: 'Run Script'
+- task: AdvancedSecurity-Codeql-Init@1
+  inputs:
+    languages: 'python'
+    querysuite: 'security-extended'
