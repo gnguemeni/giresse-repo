@@ -13,7 +13,7 @@ jobs:
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
-      version: '3.x'  # Remplacez par la version de .NET Core que vous utilisez
+      version: '5.x'  # Remplacez par la version de .NET Core que vous utilisez
 
   - task: DotNetCoreCLI@2
     inputs:
