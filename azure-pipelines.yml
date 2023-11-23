@@ -1,19 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+- main  # Vous pouvez ajuster la branche selon vos besoins
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'  # Ou choisissez une autre image selon vos besoins
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: RunGitHubScript
+  steps:
+  - checkout: self
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  # Installe Git pour récupérer le référentiel GitHub
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'runtime'
+      version: '2.x'
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
+  - script: |
+      git clone https://github.com/gnguemeni/giresse-repo
+    displayName: 'Clone GitHub Repository'
+
+  # Exécutez votre script ici
+  - script: |
+      cd votre-repo
+      ./votre-script.sh  # Remplacez par le nom de votre script
+    displayName: 'Run Script'
