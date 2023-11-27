@@ -1,4 +1,19 @@
-- task: IISWebAppDeploymentOnMachineGroup@0
-  inputs:
-    WebSiteName: 'testgir'
-    Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  steps:
+  - script: echo 'Building the project'
+
+- job: Deploy
+  displayName: 'Deploy Job'
+  steps:
+  - task: IISWebAppDeploymentOnMachineGroup@0
+    inputs:
+      WebSiteName: 'testgir'
+      Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
