@@ -1,25 +1,4 @@
-trigger:
-- task: DotNetCoreCLI@2
+- task: IISWebAppDeploymentOnMachineGroup@0
   inputs:
-    command: 'build'
-- dev
-
-pool:
-  vmImage: 'windows-latest'
-
-jobs:
-- job: Build
-  displayName: 'Build Job'
-  steps:
-  - checkout: self
-
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '5.x'  # Remplacez par la version de .NET Core que vous utilisez
-
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: '**/*.csproj'
-      arguments: '--configuration Release'
+    WebSiteName: 'testgir'
+    Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
